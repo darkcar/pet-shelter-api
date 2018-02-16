@@ -57,7 +57,14 @@ router.post('/', urlencodedParser, function(req, res) {
 	console.log(req.body);
 	// console.log(req.body.pet_name + ", " + req.body.pet_type + ", " + req.body.pet_breed + ", "
 	// 	+ req.body.pet_location + ", " + req.body.pet_latitude + ", " + req.body.pet_longitude);
-	// first check exist or not
+	
+	// 
+
+	/*
+		First check exist or not and Validate the location 	(Leave it for next version).
+	*/
+
+	// connect to db and insert the value
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 		client.query('Insert into pets_prod (name, type, breed, location, lat, long) values ($1, $2, $3, $4, $5, $6)', [req.body.pet_name, req.body.pet_type, req.body.pet_breed,req.body.pet_location, req.body.pet_latitude, req.body.pet_longitude], function(err, result){
 			done();
